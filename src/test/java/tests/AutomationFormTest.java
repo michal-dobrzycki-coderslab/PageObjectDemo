@@ -10,22 +10,11 @@ import pages.AutomationPracticeFormPage;
 
 import java.util.concurrent.TimeUnit;
 
-public class AutomationFormTest {
-    private static WebDriver driver;
-
-    @Before
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        driver = new ChromeDriver();
-
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-
-        driver.get("https://demoqa.com/automation-practice-form");
-    }
-
+public class AutomationFormTest extends BaseTest {
     @Test
     public void shouldSubmitFormSuccessfully() {
+        driver.get("https://demoqa.com/automation-practice-form");
+
         AutomationPracticeFormPage formPage = new AutomationPracticeFormPage(driver);
         String firstName = "Michał";
         String lastName = "Dobrzycki";
@@ -44,8 +33,4 @@ public class AutomationFormTest {
     }
 
 
-    @After
-    public void tearDown() {
-        // driver.quit();
-    }
 }

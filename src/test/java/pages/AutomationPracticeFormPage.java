@@ -9,8 +9,12 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class AutomationPracticeFormPage {
-    private WebDriver driver;
+public class AutomationPracticeFormPage extends BasePage {
+    // wywołaj konstruktor z BasePage
+    public AutomationPracticeFormPage(WebDriver driver) {
+        super(driver);
+    }
+
 
     @FindBy(id = "firstName")
     private WebElement firstNameInput;
@@ -36,10 +40,6 @@ public class AutomationPracticeFormPage {
     @FindBy(css = "div.modal-body")
     private WebElement submitConfirmationModal;
 
-    public AutomationPracticeFormPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
 
     // int gender 0 -> Male, 1 -> Female, 2 -> Other
     public void enterUserData(String firstName, String lastName, String email, String mobile, String dateOfBirth, int gender) {
@@ -62,11 +62,8 @@ public class AutomationPracticeFormPage {
         userEmailInput.click();
         userEmailInput.sendKeys(Keys.PAGE_DOWN);
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // to jest w BasePage
+        waitASecond();
 
         submitButton.click();
     }
